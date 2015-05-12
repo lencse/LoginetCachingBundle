@@ -1,0 +1,11 @@
+services:
+    loginet_caching.global_filesystem_cache:
+        class: Assetic\Cache\FilesystemCache
+        arguments: [%kernel.root_dir%/cache/loginet_global/assets]
+        public: false
+    loginet_caching.date_provider:
+        class: Loginet\CachingBundle\Cache\Date\DateProvider
+        public: false
+    loginet_caching.recorder_factory:
+        class: Loginet\CachingBundle\Recorder\CacheRecorderFactory
+        arguments: [@loginet_caching.global_filesystem_cache, @service_container, @loginet_caching.date_provider]
